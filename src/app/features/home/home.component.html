@@ -1,3 +1,33 @@
-<div>
-  <h1>Red Light - Green Light</h1>
+<div class="home">
+  <h1 class="home__title">Red Light - Green Light</h1>
+  <form class="home__form" [formGroup]="homeForm" (ngSubmit)="startGame()" novalidate>
+    <label for="playerName" class="home__label">Nombre del jugador</label>
+    <input
+      id="playerName"
+      class="home__input"
+      type="text"
+      pInputText
+      formControlName="name"
+      [attr.maxlength]="maxNameLength"
+      placeholder="Introduce tu nombre"
+      aria-describedby="nameHelp" />
+
+    @if (homeForm.get('name')?.touched && homeForm.get('name')?.invalid) {
+      <div class="home__help home__help--error" id="nameHelp" role="alert">
+        @if (homeForm.get('name')?.errors?.['required']) {
+          <small>El nombre es obligatorio</small>
+        }
+
+        @if (homeForm.get('name')?.errors?.['minlength']) {
+          <small>Mínimo 3 caracteres</small>
+        }
+
+        @if (homeForm.get('name')?.errors?.['maxlength']) {
+          <small>Máximo 20 caracteres</small>
+        }
+      </div>
+    }
+
+    <button pButton class="home__button" type="submit" [disabled]="homeForm.invalid">Jugar</button>
+  </form>
 </div>
