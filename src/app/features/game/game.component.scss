@@ -1,0 +1,198 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  min-height: 100vh;
+
+  &__player {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  &__controls {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    font-size: 0.95rem;
+    height: 40px;
+    flex: 0 0 auto;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &__username {
+    font-weight: 600;
+  }
+
+  &__logout {
+    margin-left: auto;
+  }
+
+  &__status {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 1rem;
+    padding: 0 0.25rem;
+    align-self: center;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__light {
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    min-width: 86px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  &__light--green {
+    color: #fff;
+    background-color: #4caf50;
+  }
+
+  &__light--red {
+    color: #fff;
+    background-color: #f44336;
+  }
+
+  &__visuals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+
+  &__chip {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  &__chip--green {
+    background-color: #4caf50;
+  }
+
+  &__chip--red {
+    background-color: #f44336;
+  }
+
+  .semaforo {
+    .semaforo__outline {
+      width: 64px;
+      background: #111;
+      padding: 0.5rem;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      align-items: center;
+      box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.02);
+    }
+
+    .semaforo__light {
+      font-size: 1.6rem;
+      opacity: 0.25;
+      transition:
+        transform 120ms ease,
+        opacity 120ms ease;
+    }
+
+    .semaforo__light--red {
+      color: #f44336;
+    }
+    .semaforo__light--green {
+      color: #4caf50;
+    }
+
+    .semaforo__light--active {
+      opacity: 1;
+      transform: scale(1.12);
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+    }
+
+    .semaforo__spacer {
+      height: 14px;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 640px) {
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__status {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__controls {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+
+    &__button {
+      flex: 1 1 auto;
+      width: auto;
+    }
+
+    &__chip {
+      width: 160px;
+      height: 160px;
+      font-size: 1.75rem;
+    }
+
+    .semaforo {
+      .semaforo__outline {
+        width: 72px;
+      }
+    }
+  }
+}
