@@ -1,0 +1,101 @@
+{
+  "configVersion": 1,
+  "timestamp": 1777479426848,
+  "index": "red-light-green-light/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "red-light-green-light/chunk-E23S5QUT.js",
+        "red-light-green-light/chunk-KCMYI2IJ.js",
+        "red-light-green-light/chunk-KFSEPJRX.js",
+        "red-light-green-light/chunk-QAOBCBCD.js",
+        "red-light-green-light/chunk-RYX55B76.js",
+        "red-light-green-light/chunk-YQIGP3W2.js",
+        "red-light-green-light/chunk-ZJEQOKDE.js",
+        "red-light-green-light/favicon.ico",
+        "red-light-green-light/index.html",
+        "red-light-green-light/main-4X4GJFVH.js",
+        "red-light-green-light/manifest.webmanifest",
+        "red-light-green-light/polyfills-B6TNHZQ6.js",
+        "red-light-green-light/styles-DOIJKPST.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "red-light-green-light/icons/icon-128x128.png",
+        "red-light-green-light/icons/icon-144x144.png",
+        "red-light-green-light/icons/icon-152x152.png",
+        "red-light-green-light/icons/icon-192x192.png",
+        "red-light-green-light/icons/icon-384x384.png",
+        "red-light-green-light/icons/icon-512x512.png",
+        "red-light-green-light/icons/icon-72x72.png",
+        "red-light-green-light/icons/icon-96x96.png",
+        "red-light-green-light/media/primeicons-4GST5W3O.woff2",
+        "red-light-green-light/media/primeicons-DHQU4SEP.svg",
+        "red-light-green-light/media/primeicons-GEFHGEHP.ttf",
+        "red-light-green-light/media/primeicons-P53SE5CV.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "red-light-green-light/chunk-E23S5QUT.js": "c458c1cddeb818e22b7cdf018852db370aa46a57",
+    "red-light-green-light/chunk-KCMYI2IJ.js": "ae7458c723f000aa57f236676e9c153f69af4646",
+    "red-light-green-light/chunk-KFSEPJRX.js": "3c349e7a5eddfbb4f587e804b017e0d0cfca34bb",
+    "red-light-green-light/chunk-QAOBCBCD.js": "bcfad31c7ad73e40d7d2c23256972bf14c060f50",
+    "red-light-green-light/chunk-RYX55B76.js": "330415ac7b7ec1c05e58d543d2274558a45aa8f5",
+    "red-light-green-light/chunk-YQIGP3W2.js": "7e4f31b929683f03d4449df3dee01d4ca31dc05a",
+    "red-light-green-light/chunk-ZJEQOKDE.js": "6c187c5deb104b26be57fbf785860115307a5b80",
+    "red-light-green-light/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "red-light-green-light/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "red-light-green-light/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "red-light-green-light/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "red-light-green-light/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "red-light-green-light/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "red-light-green-light/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "red-light-green-light/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "red-light-green-light/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "red-light-green-light/index.html": "82a7a7dacd77d688632ee236b9cf56bab0b0e05e",
+    "red-light-green-light/main-4X4GJFVH.js": "c8a47e725d41cb92c747ff33eeab444cf1b73744",
+    "red-light-green-light/manifest.webmanifest": "f2e4a1dd62c9c4fe57cd819ea2b728e0e85f6990",
+    "red-light-green-light/media/primeicons-4GST5W3O.woff2": "837c1279b6af9d297f34fdb43e6fcc9206a79f32",
+    "red-light-green-light/media/primeicons-DHQU4SEP.svg": "a07ae39027c1a780b42fd82fad7575c2924d9d28",
+    "red-light-green-light/media/primeicons-GEFHGEHP.ttf": "3b878ca7e88945a8ec25814810b95367d8977ae6",
+    "red-light-green-light/media/primeicons-P53SE5CV.woff": "361e3af71bb4e515feead2f787348a92a5527158",
+    "red-light-green-light/polyfills-B6TNHZQ6.js": "bf76ac291d7f51c1139b7edcf86b359a30c08c64",
+    "red-light-green-light/styles-DOIJKPST.css": "dc0db927099d9bd73b83e81fbe9db4addce304a8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
