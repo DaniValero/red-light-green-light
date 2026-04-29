@@ -1,14 +1,10 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { SessionService } from '../../core/services/session.service';
 import { ButtonModule } from 'primeng/button';
+
+import { SessionService } from '../../core/services/session.service';
 import { GameService } from '../../core/services/game.service';
-import type { PlayerState } from '../../core/services/storage.service';
-import { signal } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-game',
@@ -17,37 +13,40 @@ import { Subscription } from 'rxjs';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent {
-  private _router = inject(Router);
-  private _session = inject(SessionService);
-  private _game = inject(GameService);
+export class GameComponent implements OnInit, OnDestroy {
+  private readonly router = inject(Router);
+  private readonly session = inject(SessionService);
+  private readonly game = inject(GameService);
 
-  public player = signal<PlayerState | null>(this._session.getCurrentPlayer());
-  public score = signal<number>(0);
-  public maxScore = signal<number>(0);
-  public light = signal<'red' | 'green'>('red');
-
-  private subs: Subscription[] = [];
+  readonly player = this.game.player;
+  readonly score = this.game.score;
+  readonly maxScore = this.game.maxScore;
+  readonly light = this.game.light;
 
   ngOnInit(): void {
-    this.subs.push(this._game.player$.subscribe(p => this.player.set(p)));
-    this.subs.push(this._game.score$.subscribe(s => this.score.set(s)));
-    this.subs.push(this._game.maxScore$.subscribe(m => this.maxScore.set(m)));
-    this.subs.push(this._game.light$.subscribe(l => this.light.set(l)));
-    this._game.start();
+    this.game.start();
   }
 
   ngOnDestroy(): void {
-    this._game.stop();
-    this.subs.forEach(s => s.unsubscribe());
+    this.game.stop();
   }
 
-  onStepLeft(): void { this._game.handleStep('left'); }
-  onStepRight(): void { this._game.handleStep('right'); }
+  onStepLeft(): void {
+    this.game.handleStep('left');
+  }
+
+  onStepRight(): void {
+    this.game.handleStep('right');
+  }
 
   logout(): void {
-    this._game.stop();
-    this._session.logout();
-    this._router.navigate(['/']);
+    this.game.stop();
+    this.session.logout();
+    this.router.navigate(['/']);
+  }
+
+  openRanking(): void {
+    this.game.stop();
+    this.router.navigate(['/ranking']);
   }
 }

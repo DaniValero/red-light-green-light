@@ -1,126 +1,161 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, inject, OnDestroy, signal, computed, effect } from '@angular/core';
 import { SessionService } from './session.service';
 import { PlayerState } from './storage.service';
 
 type Light = 'red' | 'green';
+type Button = 'left' | 'right';
 
 @Injectable({ providedIn: 'root' })
 export class GameService implements OnDestroy {
-  private session = inject(SessionService);
+  private readonly session = inject(SessionService);
 
-  public readonly light$ = new BehaviorSubject<Light>('red');
-  public readonly score$ = new BehaviorSubject<number>(0);
-  public readonly maxScore$ = new BehaviorSubject<number>(0);
-  public readonly player$ = new BehaviorSubject<PlayerState | null>(null);
+  readonly light = signal<Light>('red');
+  readonly score = signal<number>(0);
+  readonly maxScore = signal<number>(0);
+  readonly player = signal<PlayerState | null>(null);
+  readonly running = signal<boolean>(false);
 
-  private running = false;
+  readonly isGreen = computed(() => this.light() === 'green');
+
   private timerId: ReturnType<typeof setTimeout> | null = null;
-  private lastButton: 'left' | 'right' | null = null;
+  private lastButton: Button | null = null;
 
   constructor() {
-    const p = this.session.getCurrentPlayer();
-    if (p) {
-      this.player$.next({ ...p });
-      this.score$.next(p.score ?? 0);
-      this.maxScore$.next(p.maxScore ?? 0);
-    }
+    this.initializePlayer();
+
+
+    effect(() => {
+      const sessionPlayer = this.session.currentPlayer();
+
+      if (!sessionPlayer) {
+        this.player.set(null);
+        this.score.set(0);
+        this.maxScore.set(0);
+        this.running.set(false);
+        this.clearTimer();
+        this.lastButton = null;
+        return;
+      }
+
+      const current = this.player();
+      if (!current || current.id !== sessionPlayer.id) {
+        this.player.set({ ...sessionPlayer });
+        this.score.set(sessionPlayer.score ?? 0);
+        this.maxScore.set(sessionPlayer.maxScore ?? 0);
+      }
+    });
+
+    effect(() => {
+      const player = this.player();
+      if (!player) return;
+
+      try {
+        this.session.updatePlayer(player);
+      } catch {
+        console.log('Error updating player');
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.clearTimer();
   }
 
-  public start(): void {
-    if (this.running) return;
-    this.running = true;
-    this.clearTimer();
+  start(): void {
+    if (this.running()) return;
+
+    this.running.set(true);
     this.lastButton = null;
-    this.light$.next('red');
-    this.scheduleNext('red');
+    this.setLight('red');
   }
 
-  public stop(): void {
-    this.running = false;
-    this.clearTimer();
+  stop(): void {
+    this.running.set(false);
     this.lastButton = null;
-    this.light$.next('red');
+    this.clearTimer();
+    this.light.set('red');
   }
 
-  public handleStep(button: 'left' | 'right'): void {
-    const player = this.player$.value;
-    if (!player) return;
-
-    const light = this.light$.value;
-
-    if (light === 'red') {
-      if (this.score$.value !== 0) this.updateScore(0);
-      this.lastButton = null;
+  handleStep(button: Button): void {
+    if (!this.running() || !this.isGreen()) {
+      this.resetScoreIfNeeded();
       return;
     }
 
-    if (this.lastButton === null || this.lastButton !== button) {
-      this.updateScore(this.score$.value + 1);
+    if (this.lastButton !== button) {
+      this.incrementScore();
       this.lastButton = button;
     } else {
-      const newScore = Math.max(0, this.score$.value - 1);
-      this.updateScore(newScore);
+      this.decrementScore();
     }
   }
 
-  private updateScore(newScore: number): void {
-    const player = this.player$.value;
+  private initializePlayer(): void {
+    const player = this.session.currentPlayer();
     if (!player) return;
-    this.score$.next(newScore);
-    if (newScore > this.maxScore$.value) {
-      this.maxScore$.next(newScore);
-      player.maxScore = newScore;
-    }
-    player.score = newScore;
-    this.player$.next({ ...player });
-    try {
-      this.session.updatePlayer({ ...player });
-    } catch {
-      // ignore persistence errors
-    }
+
+    this.player.set({ ...player });
+    this.score.set(player.score ?? 0);
+    this.maxScore.set(player.maxScore ?? 0);
   }
 
-  private scheduleNext(current: Light): void {
+  private incrementScore(): void {
+    this.updateScore(this.score() + 1);
+  }
+
+  private decrementScore(): void {
+    this.updateScore(Math.max(0, this.score() - 1));
+  }
+
+  private resetScoreIfNeeded(): void {
+    if (this.score() !== 0) {
+      this.updateScore(0);
+    }
+    this.lastButton = null;
+  }
+
+  private updateScore(score: number): void {
+    const player = this.player();
+    if (!player) return;
+
+    const maxScore = Math.max(score, this.maxScore());
+
+    this.score.set(score);
+    this.maxScore.set(maxScore);
+
+    this.player.set({
+      ...player,
+      score,
+      maxScore,
+    });
+  }
+
+  private setLight(light: Light): void {
+    this.light.set(light);
+    this.lastButton = null;
+
+    if (!this.running()) return;
+
     this.clearTimer();
-    if (!this.running) return;
 
-    if (current === 'red') {
-      this.timerId = setTimeout(() => this.switchToGreen(), 3000);
-    } else {
-      const duration = this.computeGreenDuration();
-      this.timerId = setTimeout(() => this.switchToRed(), duration);
-    }
-  }
+    const delay =
+      light === 'red'
+        ? 3000
+        : this.computeGreenDuration();
 
-  private switchToGreen(): void {
-    if (!this.running) return;
-    this.light$.next('green');
-    this.lastButton = null;
-    this.scheduleNext('green');
-  }
-
-  private switchToRed(): void {
-    if (!this.running) return;
-    this.light$.next('red');
-    this.lastButton = null;
-    this.scheduleNext('red');
+    this.timerId = setTimeout(() => {
+      this.setLight(light === 'red' ? 'green' : 'red');
+    }, delay);
   }
 
   private computeGreenDuration(): number {
-    const score = this.score$.value ?? 0;
-    const base = Math.max(10000 - score * 100, 2000);
-    const jitter = Math.random() * 3000 - 1500; // random(-1500,1500)
-    const duration = Math.round(base + jitter);
-    return Math.max(2000, duration);
+    const base = Math.max(10000 - this.score() * 100, 2000);
+    const jitter = Math.random() * 3000 - 1500;
+    return Math.max(2000, Math.round(base + jitter));
   }
 
   private clearTimer(): void {
-    if (this.timerId != null) {
+    if (this.timerId) {
       clearTimeout(this.timerId);
       this.timerId = null;
     }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,13 +17,20 @@ import { NAME_MAX_LENGTH } from '../../core/constants';
   styleUrls: ['./home.component.scss'],
   providers: [HomeFormService]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private _router = inject(Router);
   private _sessionService = inject(SessionService);
   private _formService = inject(HomeFormService);
 
   public homeForm: FormGroup = this._formService.createForm();
   public maxNameLength = NAME_MAX_LENGTH;
+
+  ngOnInit(): void {
+    const current = this._sessionService.currentPlayer();
+    if (current) {
+      this._sessionService.logout();
+    }
+  }
 
   openRanking(): void { this._router.navigate(['/ranking']); }
 
