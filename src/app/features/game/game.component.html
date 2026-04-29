@@ -1,0 +1,52 @@
+<div class="game">
+  <header class="game__nav">
+    @if (player()) {
+      <div class="game__username">Jugando: {{ player()?.name }}</div>
+    }
+
+    @if (!player()) {
+      <div class="game__username">Invitado</div>
+    }
+
+    <button pButton type="button" class="game__logout" (click)="logout()">Cerrar sesión</button>
+  </header>
+
+  <div class="game__container">
+    <section class="game__status">
+      <div class="game__info">
+        <div>
+          Máxima puntuación: <strong>{{ maxScore() }}</strong>
+        </div>
+        <div>
+          Puntos: <strong>{{ score() }}</strong>
+        </div>
+      </div>
+
+      <div class="game__visuals">
+        <div
+          class="game__chip"
+          [class.game__chip--green]="light() === 'green'"
+          [class.game__chip--red]="light() === 'red'">
+          {{ light() | uppercase }}
+        </div>
+
+        <div class="semaforo" aria-hidden="true">
+          <div class="semaforo__outline">
+            <i
+              class="pi pi-circle-fill semaforo__light semaforo__light--red"
+              [class.semaforo__light--active]="light() === 'red'"></i>
+            <div class="semaforo__spacer"></div>
+            <i
+              class="pi pi-circle-fill semaforo__light semaforo__light--green"
+              [class.semaforo__light--active]="light() === 'green'"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="game__controls">
+      <button pButton type="button" class="game__button" (click)="onStepLeft()">Caminar izquierda</button>
+      <button pButton type="button" class="game__button" (click)="onStepRight()">Caminar derecha</button>
+    </section>
+  </div>
+</div>

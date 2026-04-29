@@ -43,4 +43,13 @@ export class SessionService {
     this.storage.savePlayer(player);
     this.current = player;
   }
+
+  public logout(): void {
+    try {
+      localStorage.removeItem(this.CURRENT_KEY);
+    } catch (e) {
+      // ignore
+    }
+    this.current = undefined;
+  }
 }

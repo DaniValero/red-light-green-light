@@ -1,0 +1,43 @@
+<div class="ranking">
+  <header class="ranking__header">
+    <h2>Ranking</h2>
+  </header>
+
+  <section class="ranking__list">
+    @if (players.length === 0) {
+      <div>No hay jugadores todavía.</div>
+    }
+
+    @if (players.length > 0) {
+      <ol>
+        @for (p of players; track p.id) {
+          <li
+            class="ranking__item"
+            [class.ranking__item--gold]="$index === 0"
+            [class.ranking__item--silver]="$index === 1"
+            [class.ranking__item--bronze]="$index === 2">
+            <span class="ranking__player">
+              <strong>{{ p.name | titlecase }}</strong>
+              <i
+                class="pi ranking__icon"
+                [class.pi-crown]="$index === 0"
+                [class.pi-trophy]="$index === 1"
+                [class.pi-medal]="$index === 2"
+                aria-hidden="true"
+                title="Posición {{ $index + 1 }}"></i>
+            </span>
+
+            <span class="ranking__score"
+              ><strong><app-score-badge [score]="p.maxScore"></app-score-badge> puntos</strong></span
+            >
+          </li>
+        }
+      </ol>
+    }
+  </section>
+
+  <section class="ranking__actions">
+    <button pButton type="button" class="ranking__btn" (click)="back()">Volver</button>
+    <button pButton type="button" class="ranking__btn" (click)="clear()">Borrar todos</button>
+  </section>
+</div>

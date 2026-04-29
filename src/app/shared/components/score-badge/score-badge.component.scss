@@ -1,0 +1,22 @@
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem;
+  padding: 0 0.5rem;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 720px) {
+  .score-badge {
+    min-width: 6.4rem;
+    padding: 0 0.8rem;
+  }
+}
