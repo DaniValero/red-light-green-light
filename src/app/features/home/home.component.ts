@@ -25,6 +25,8 @@ export class HomeComponent {
   public homeForm: FormGroup = this._formService.createForm();
   public maxNameLength = NAME_MAX_LENGTH;
 
+  openRanking(): void { this._router.navigate(['/ranking']); }
+
   startGame(): void {
     if (this.homeForm.invalid) {
       this.homeForm.markAllAsTouched();
