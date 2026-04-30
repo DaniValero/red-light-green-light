@@ -4,10 +4,7 @@
       <div class="game__username">Jugando: {{ player()?.name }}</div>
     }
 
-    @if (!player()) {
-      <div class="game__username">Invitado</div>
-    }
-
+    <button pButton type="button" class="game__logout" (click)="openRanking()">Ranking</button>
     <button pButton type="button" class="game__logout" (click)="logout()">Cerrar sesión</button>
   </header>
 
