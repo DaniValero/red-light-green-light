@@ -1,4 +1,4 @@
-#  Red Light, Green Light
+# Red Light, Green Light
 
 Aplicación web desarrollada con Angular que implementa la lógica del juego "Red Light, Green Light".
 
@@ -6,20 +6,20 @@ Aplicación web desarrollada con Angular que implementa la lógica del juego "Re
 
 ## Tecnologías utilizadas
 
-* Angular 19
-* TypeScript
-* RxJS
-* PrimeNG
-* ESLint + Prettier
+- Angular 19
+- TypeScript
+- RxJS
+- PrimeNG
+- ESLint + Prettier
 
 ---
 
-##  Requisitos previos
+## Requisitos previos
 
 Antes de ejecutar el proyecto en local, asegúrate de tener instalado:
 
-* Node.js **v22.x** (recomendado)
-* npm (incluido con Node)
+- Node.js **v22.x** (recomendado)
+- npm (incluido con Node)
 
 ---
 
@@ -98,14 +98,14 @@ npm run lint
 
 ---
 
-##  Despliegue
+## Despliegue
 
 El proyecto está configurado para desplegarse automáticamente en GitHub Pages mediante CI/CD al hacer push a la rama `main`.
 
 ---
 
-##  Notas adicionales
+## Notas adicionales
 
-* El proyecto utiliza PrimeNG para componentes UI.
-* Se recomienda usar Node LTS para evitar problemas de compatibilidad.
-* El despliegue en GitHub Pages usa `base-href` dinámico basado en el nombre del repositorio.
+- El proyecto utiliza PrimeNG para componentes UI.
+- Se recomienda usar Node LTS para evitar problemas de compatibilidad.
+- El despliegue en GitHub Pages usa `base-href` dinámico basado en el nombre del repositorio.
