@@ -1,59 +1,111 @@
-# RedLightGreenLight
+#  Red Light, Green Light
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.24.
+Aplicación web desarrollada con Angular que implementa la lógica del juego "Red Light, Green Light".
 
-## Development server
+---
 
-To start a local development server, run:
+## Tecnologías utilizadas
+
+* Angular 19
+* TypeScript
+* RxJS
+* PrimeNG
+* ESLint + Prettier
+
+---
+
+##  Requisitos previos
+
+Antes de ejecutar el proyecto en local, asegúrate de tener instalado:
+
+* Node.js **v22.x** (recomendado)
+* npm (incluido con Node)
+
+---
+
+## Instalación
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/DaniValero/red-light-green-light.git
+cd red-light-green-light
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+---
+
+## Ejecución en local
+
+Para levantar la aplicación en modo desarrollo:
+
+```bash
+npm start
+```
+
+o equivalente:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+La aplicación estará disponible en:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## Build de producción
+
+Para generar la versión optimizada:
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
+Los archivos compilados se generarán en:
 
-To build the project run:
+```text
+dist/red-light-green-light/
+```
+
+---
+
+## Tests
+
+Ejecutar tests unitarios:
 
 ```bash
-ng build
+npm run test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Linting
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Analizar el código con ESLint:
 
 ```bash
-ng test
+npm run lint
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+##  Despliegue
 
-```bash
-ng e2e
-```
+El proyecto está configurado para desplegarse automáticamente en GitHub Pages mediante CI/CD al hacer push a la rama `main`.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+##  Notas adicionales
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* El proyecto utiliza PrimeNG para componentes UI.
+* Se recomienda usar Node LTS para evitar problemas de compatibilidad.
+* El despliegue en GitHub Pages usa `base-href` dinámico basado en el nombre del repositorio.
