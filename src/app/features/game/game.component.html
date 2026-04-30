@@ -1,7 +1,7 @@
 <div class="game">
   <header class="game__nav">
     @if (player()) {
-      <div class="game__username">Jugando: {{ player()?.name }}</div>
+      <div class="game__username">Jugando: {{ player()?.name | titlecase}}</div>
     }
 
     <button pButton type="button" class="game__logout" (click)="openRanking()">Ranking</button>
