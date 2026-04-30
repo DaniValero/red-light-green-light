@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
@@ -9,7 +9,7 @@ import { GameService } from '../../core/services/game.service';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, ButtonModule],
+  imports: [CommonModule, ButtonModule, TitleCasePipe],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
